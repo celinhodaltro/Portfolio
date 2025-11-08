@@ -16,9 +16,6 @@
                     <MudText Typo="Typo.body2" Class="card-description">
                         Baixe meu currículo em PDF
                     </MudText>
-                    <div class="card-footer">
-                        <MudIcon Icon="@Icons.Material.Filled.ArrowForward" Size="Size.Small" />
-                    </div>
                 </div>
             </MudPaper>
         </MudItem>
@@ -34,9 +31,6 @@
                     <MudText Typo="Typo.body2" Class="card-description">
                         Envie uma mensagem direta
                     </MudText>
-                    <div class="card-footer">
-                        <MudIcon Icon="@Icons.Material.Filled.ArrowForward" Size="Size.Small" />
-                    </div>
                 </div>
             </MudPaper>
         </MudItem>
@@ -164,7 +158,7 @@
         transform: translateX(4px);
     }
 
-    @keyframes float {
+    @@keyframes float {
         0%, 100% {
             transform: translateY(0px);
         }
@@ -257,7 +251,7 @@
     }
 
     /* Responsive Design */
-    @media (max-width: 768px) {
+    @@media (max-width: 768px) {
         .contact-grid {
             gap: 1.5rem;
         }
@@ -285,7 +279,7 @@
         }
     }
 
-    @media (max-width: 480px) {
+    @@media (max-width: 480px) {
         .contact-card {
             min-height: 160px;
             padding: 1rem;
