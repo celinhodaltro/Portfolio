@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    public class Experience
+    public class ExperienceModel
     {
         public string? Title { get; set; }
         public string? Detail { get; set; }

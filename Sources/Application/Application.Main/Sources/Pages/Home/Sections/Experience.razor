@@ -1,5 +1,5 @@
 @using Application.Main.Sources.Components.Dialogs
-
+@inject IDialogService DialogService
 <div id="experience" class="section-experience">
     <MudText Class="mb-5 text-white" Align="Align.Center" Typo="Typo.h4">EXPERIÊNCIAS</MudText>
     <MudDivider Class="mb-5" />
@@ -139,8 +139,8 @@
 </style>
 
 @code {
-    [Inject]
-    private IDialogService? dialogService { get; set; }
+
+
 
     private List<ExperienceModel> Experiences = new()
     {
@@ -180,17 +180,8 @@
         var parameters = new DialogParameters();
         parameters.Add("_experience", experience);
         var options = new DialogOptions { MaxWidth = MaxWidth.Small, FullWidth = true, CloseButton = true, NoHeader = true };
-        await dialogService.ShowAsync<DialogExperience>("Experiencia", parameters, options);
+        await DialogService.ShowAsync<DialogExperience>("Experiencia", parameters, options);
     }
 
-    public class ExperienceModel
-    {
-        public string Company { get; set; } = string.Empty;
-        public string Title { get; set; } = string.Empty;
-        public string CompanyImage { get; set; } = string.Empty;
-        public DateTime Start { get; set; }
-        public DateTime? End { get; set; }
-        public string Description { get; set; } = string.Empty;
-        public string Detail { get; set; } = string.Empty;
-    }
+
 }
