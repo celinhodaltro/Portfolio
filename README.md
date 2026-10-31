@@ -7,7 +7,8 @@ Portfólio profissional de João Marcelo Daltro Marques, desenvolvido com Blazor
 ## Tecnologias
 
 - .NET 10 e Blazor WebAssembly
-- CSS com isolamento por componente, sem bibliotecas de UI
+- MudBlazor, com identidade visual inspirada em Steven Universo
+- CSS isolado por componente
 - GitHub Actions para build e publicação no GitHub Pages
 
 ## Estrutura
@@ -15,7 +16,8 @@ Portfólio profissional de João Marcelo Daltro Marques, desenvolvido com Blazor
 ```
 src/Portfolio
 ├── Components
-│   ├── Layout       cabeçalho, rodapé e layout principal
+│   ├── Dialogs      detalhes de experiências, projetos e contato
+│   ├── Layout       layout principal e tema
 │   ├── Sections     seções da página inicial
 │   └── Shared       componentes reutilizáveis
 ├── Data             conteúdo do portfólio: perfil, experiências e projetos

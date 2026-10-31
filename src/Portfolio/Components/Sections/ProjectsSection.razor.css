@@ -1,171 +1,68 @@
-.projects {
-    display: grid;
-    gap: clamp(1.5rem, 3vw, 2rem);
-}
-
 .project {
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    background: var(--surface);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
-    transition: border-color 0.3s var(--ease);
 }
 
-.project:hover {
-    border-color: var(--line-strong);
+.project__image,
+.project__cover {
+    width: 100%;
+    height: 180px;
+    border-bottom: 1px solid var(--glass-border);
 }
 
 .project__image {
-    aspect-ratio: 2.1 / 1;
-    border-bottom: 1px solid var(--line);
-    background: var(--surface-raised);
-}
-
-.project__image img {
-    width: 100%;
-    height: 100%;
     object-fit: cover;
 }
 
-.project__body {
+.project__cover {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(1.75rem, 4vw, 3.5rem);
-    padding: clamp(1.5rem, 4vw, 2.75rem);
+    place-items: center;
+    padding: 1rem;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255, 100, 200, 0.28), transparent 55%),
+        radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.28), transparent 55%),
+        rgba(30, 30, 47, 0.75);
 }
 
-.project__overview,
-.project__specs {
+::deep .project__cover-icon {
+    width: 72px;
+    height: 72px;
+    color: rgba(255, 255, 255, 0.9);
+    filter: drop-shadow(0 4px 18px rgba(0, 212, 255, 0.45));
+}
+
+.project__body {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 10px;
+    padding: 16px 18px 8px;
 }
 
-.project__heading {
+.project__meta {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 0.75rem;
+    gap: 8px;
 }
 
-.project__context {
-    color: var(--text-subtle);
+::deep .project__context {
+    color: var(--text-soft);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
 }
 
-.project__name {
-    font-size: clamp(1.6rem, 3.2vw, 2.1rem);
-    font-weight: 800;
-    letter-spacing: -0.025em;
-    line-height: 1.12;
+::deep .project__summary {
+    flex: 1;
+    color: var(--text-soft);
 }
 
-.project__summary {
-    color: var(--text-muted);
-    font-size: 1.02rem;
-}
-
-.project__details {
-    display: grid;
-    gap: 1.1rem;
-    margin: 0.25rem 0 0;
-}
-
-.project__details dt,
-.project__label {
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-}
-
-.project__details dt {
-    margin-bottom: 0.35rem;
-}
-
-.project__details dd {
-    margin: 0;
-    font-size: 0.95rem;
-}
-
-.project__terminal {
-    margin: 0.25rem 0 0;
-    padding: 1rem 1.1rem;
-    background: var(--bg);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-small);
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    line-height: 1.8;
-    color: var(--text);
-    overflow-x: auto;
-}
-
-.project__prompt {
-    color: var(--accent);
-    user-select: none;
-}
-
-.project__features {
-    display: grid;
-    gap: 0.55rem;
-    margin-bottom: 0.5rem;
-}
-
-.project__features li {
-    position: relative;
-    padding-left: 1.2rem;
-    font-size: 0.95rem;
-}
-
-.project__features li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.72em;
-    width: 0.45rem;
-    height: 1.5px;
-    background: var(--accent);
-}
-
-.project__links {
+.project__actions {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    gap: 0.6rem 1.25rem;
-    margin-top: auto;
-    padding-top: 1rem;
-    border-top: 1px solid var(--line);
-}
-
-.project__link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-weight: 600;
-    font-size: 0.92rem;
-    transition: color 0.2s ease;
-}
-
-.project__link:hover {
-    color: var(--accent);
-}
-
-.project__note {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    color: var(--text-subtle);
-    font-size: 0.88rem;
-}
-
-@media (max-width: 860px) {
-    .project__body {
-        grid-template-columns: 1fr;
-    }
-
-    .project__image {
-        aspect-ratio: 16 / 10;
-    }
+    gap: 8px;
+    padding: 12px 18px 18px;
 }

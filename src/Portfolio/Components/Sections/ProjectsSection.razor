@@ -1,78 +1,56 @@
-<section id="projetos" class="section">
-    <div class="container">
-        <SectionHeader Index="03" Label="Projetos" Title="Projetos de destaque"
-                       Description="Projetos autorais e entregas profissionais que mostram como penso e construo software." />
+@inject IDialogService DialogService
 
-        <div class="projects">
-            @foreach (var project in Projects.Featured)
-            {
-                <article class="project" data-reveal>
-                    @if (project.Image is not null)
-                    {
-                        <figure class="project__image">
-                            <img src="@project.Image" alt="@project.ImageAlt" loading="lazy" decoding="async" width="1600" height="768" />
-                        </figure>
-                    }
+<SectionTitle Title="Projetos" Subtitle="Projetos autorais e entregas profissionais em destaque." />
 
-                    <div class="project__body">
-                        <div class="project__overview">
-                            <div class="project__heading">
-                                <p class="project__context mono">@project.Context</p>
-                                <StatusBadge Status="project.Status" />
-                            </div>
-                            <h3 class="project__name">@project.Name</h3>
-                            <p class="project__summary">@project.Summary</p>
-
-                            <dl class="project__details">
-                                <div>
-                                    <dt class="mono">Problema</dt>
-                                    <dd>@project.Problem</dd>
-                                </div>
-                                <div>
-                                    <dt class="mono">Minha participação</dt>
-                                    <dd>@project.Contribution</dd>
-                                </div>
-                            </dl>
-
-                            @if (project.Commands is not null)
-                            {
-                                <pre class="project__terminal" aria-label="Instalação"><code>@foreach (var command in project.Commands)
-{<span class="project__prompt">$ </span>@command@("\n")}</code></pre>
-                            }
-                        </div>
-
-                        <div class="project__specs">
-                            <p class="project__label mono">Funcionalidades</p>
-                            <ul class="project__features">
-                                @foreach (var feature in project.Features)
-                                {
-                                    <li>@feature</li>
-                                }
-                            </ul>
-
-                            <p class="project__label mono">Tecnologias</p>
-                            <StackList Items="project.Stack" />
-
-                            <div class="project__links">
-                                @foreach (var link in project.Links)
-                                {
-                                    <a class="project__link" href="@link.Url" target="_blank" rel="noopener">
-                                        @link.Label
-                                        <Icon Name="arrow-up-right" />
-                                    </a>
-                                }
-                                @if (project.AccessNote is not null)
-                                {
-                                    <span class="project__note">
-                                        <Icon Name="lock" />
-                                        @project.AccessNote
-                                    </span>
-                                }
-                            </div>
-                        </div>
+<MudGrid Spacing="3">
+    @foreach (var project in Projects.Featured)
+    {
+        <MudItem xs="12" sm="6" lg="4">
+            <article class="project glass lift">
+                @if (project.Image is not null)
+                {
+                    <img class="project__image" src="@project.Image" alt="@project.ImageAlt" loading="lazy" />
+                }
+                else
+                {
+                    <div class="project__cover">
+                        <MudIcon Icon="@(project.CoverIcon ?? Icons.Material.Filled.Code)" Class="project__cover-icon" />
                     </div>
-                </article>
-            }
-        </div>
-    </div>
-</section>
+                }
+
+                <div class="project__body">
+                    <div class="project__meta">
+                        <MudText Typo="Typo.caption" Class="project__context">@project.Context</MudText>
+                        <StatusChip Status="project.Status" />
+                    </div>
+                    <MudText Typo="Typo.h6">@project.Name</MudText>
+                    <MudText Typo="Typo.body2" Class="project__summary">@project.Summary</MudText>
+                    <TechChips Items="project.Stack" Limit="5" />
+                </div>
+
+                <div class="project__actions">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" StartIcon="@Icons.Material.Filled.Info"
+                               OnClick="() => OpenAsync(project)">
+                        Detalhes
+                    </MudButton>
+                    @foreach (var link in project.Links.Take(2))
+                    {
+                        <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Size="Size.Small" Href="@link.Url" Target="_blank"
+                                   StartIcon="@(link.Url.Contains("github.com") ? Icons.Custom.Brands.GitHub : Icons.Material.Filled.Launch)">
+                            @link.Label
+                        </MudButton>
+                    }
+                </div>
+            </article>
+        </MudItem>
+    }
+</MudGrid>
+
+@code {
+    private Task OpenAsync(FeaturedProject project)
+    {
+        var parameters = new DialogParameters<ProjectDialog> { { x => x.Project, project } };
+        var options = new DialogOptions { MaxWidth = MaxWidth.Medium, FullWidth = true, CloseButton = true, CloseOnEscapeKey = true };
+        return DialogService.ShowAsync<ProjectDialog>(project.Name, parameters, options);
+    }
+}

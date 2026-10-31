@@ -1,158 +1,81 @@
 .hero {
-    position: relative;
-    padding-block: clamp(3.5rem, 9vw, 7rem) clamp(4rem, 9vw, 6.5rem);
-    overflow: hidden;
-}
-
-.hero__inner {
     display: grid;
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.9fr);
-    gap: clamp(2.5rem, 6vw, 5rem);
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
     align-items: center;
 }
 
-.hero__location {
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-}
-
-.hero__title {
+.hero__avatar {
     display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
+    justify-content: center;
 }
 
-.hero__name {
-    font-size: clamp(2.4rem, 6.2vw, 4.4rem);
-    font-weight: 800;
-    line-height: 1.02;
-    letter-spacing: -0.035em;
+::deep .hero__avatar-image {
+    width: 150px;
+    height: 225px;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
-.hero__role {
-    font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+::deep .hero__role {
+    color: var(--cyan);
+}
+
+::deep .hero__headline {
     font-weight: 500;
-    color: var(--text-muted);
 }
 
-.hero__headline {
-    margin-top: 1.75rem;
-    max-width: 38ch;
-    font-size: clamp(1.1rem, 2vw, 1.3rem);
-    font-weight: 600;
-    line-height: 1.45;
-}
-
-.hero__intro {
-    margin-top: 1rem;
-    max-width: 60ch;
-    color: var(--text-muted);
+::deep .hero__intro {
+    margin-top: 0.75rem;
+    color: var(--text-soft);
+    line-height: 1.7;
 }
 
 .hero__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.8rem;
-    margin-top: 2.25rem;
-}
-
-.hero__social {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 2rem;
-}
-
-.hero__social a {
-    display: grid;
-    place-items: center;
-    width: 42px;
-    height: 42px;
-    border: 1px solid var(--line);
-    border-radius: 50%;
-    color: var(--text-muted);
-    transition: color 0.2s ease, border-color 0.2s ease;
-}
-
-.hero__social a:hover {
-    color: var(--accent);
-    border-color: var(--accent);
-}
-
-.hero__panel {
-    position: relative;
-    aspect-ratio: 1;
-    border: 1px solid var(--line);
-    border-radius: 24px;
-    background: radial-gradient(circle at 50% 50%, rgba(227, 168, 87, 0.07), transparent 65%), var(--surface);
-    overflow: hidden;
-}
-
-.hero__map {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.9;
-    animation: drift 40s linear infinite alternate;
-}
-
-.hero__focus {
-    position: absolute;
-    left: 1.25rem;
-    right: 1.25rem;
-    bottom: 1.25rem;
-    display: grid;
-    gap: 0.4rem;
-}
-
-.hero__focus li {
-    display: flex;
     align-items: center;
-    gap: 0.8rem;
-    padding: 0.6rem 0.85rem;
-    background: rgba(11, 15, 14, 0.78);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    gap: 10px;
+    margin-top: 1.5rem;
 }
 
-.hero__focus-index {
-    color: var(--accent);
+::deep .hero__social {
+    color: #fff;
 }
 
-@keyframes drift {
-    from {
-        transform: scale(1.05) rotate(0deg);
-    }
-
-    to {
-        transform: scale(1.12) rotate(6deg);
-    }
+.skill {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 22px 20px;
+    text-align: center;
 }
 
-@media (max-width: 900px) {
-    .hero__inner {
+::deep .skill__icon {
+    color: var(--cyan);
+}
+
+::deep .skill__description {
+    flex: 1;
+    color: var(--text-soft);
+}
+
+::deep .skill__chips {
+    justify-content: center;
+}
+
+@media (max-width: 700px) {
+    .hero {
         grid-template-columns: 1fr;
+        gap: 1.25rem;
+        text-align: center;
     }
 
-    .hero__panel {
-        aspect-ratio: 4 / 3;
-        max-width: 560px;
-    }
-}
-
-@media (max-width: 520px) {
-    .hero__panel {
-        aspect-ratio: auto;
-        min-height: 300px;
-    }
-
-    .hero__focus li {
-        font-size: 0.85rem;
+    .hero__actions {
+        justify-content: center;
     }
 }

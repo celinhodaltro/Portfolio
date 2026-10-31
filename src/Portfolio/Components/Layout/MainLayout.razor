@@ -1,8 +1,35 @@
 @inherits LayoutComponentBase
 
-<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
-<SiteHeader />
-<main id="conteudo">
-    @Body
-</main>
-<SiteFooter />
+<MudThemeProvider Theme="Theme" IsDarkMode="true" />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+@Body
+
+@code {
+    private static readonly MudTheme Theme = new()
+    {
+        PaletteDark = new PaletteDark
+        {
+            Primary = "#00d4ff",
+            Secondary = "#ff64c8",
+            Surface = "#1e1e2f",
+            Background = "rgba(0,0,0,0)",
+            AppbarBackground = "#1e1e2f",
+            TextPrimary = "#ffffff",
+            TextSecondary = "rgba(255,255,255,0.72)"
+        },
+        Typography = new Typography
+        {
+            Default = new DefaultTypography { FontFamily = ["Fredoka", "sans-serif"] },
+            H1 = new H1Typography { FontFamily = ["Fredoka", "sans-serif"] },
+            H2 = new H2Typography { FontFamily = ["Fredoka", "sans-serif"] },
+            H3 = new H3Typography { FontFamily = ["Fredoka", "sans-serif"] },
+            H4 = new H4Typography { FontFamily = ["Fredoka", "sans-serif"], FontWeight = "600" },
+            H5 = new H5Typography { FontFamily = ["Fredoka", "sans-serif"] },
+            H6 = new H6Typography { FontFamily = ["Fredoka", "sans-serif"] },
+            Button = new ButtonTypography { FontFamily = ["Fredoka", "sans-serif"], TextTransform = "none" }
+        }
+    };
+}

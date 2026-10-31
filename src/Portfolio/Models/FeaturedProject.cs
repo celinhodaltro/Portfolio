@@ -13,4 +13,5 @@ public sealed record FeaturedProject(
     string? Image = null,
     string? ImageAlt = null,
     string? AccessNote = null,
-    IReadOnlyList<string>? Commands = null);
+    IReadOnlyList<string>? Commands = null,
+    string? CoverIcon = null);

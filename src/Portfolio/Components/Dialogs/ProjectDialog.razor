@@ -1,0 +1,53 @@
+<MudDialog Class="portfolio-dialog">
+    <TitleContent>
+        <div class="title">
+            <MudText Typo="Typo.h6">@Project.Name</MudText>
+            <StatusChip Status="Project.Status" />
+        </div>
+        <MudText Typo="Typo.body2" Class="muted">@Project.Context</MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudText Typo="Typo.body1" Class="mb-4">@Project.Summary</MudText>
+
+        <MudText Typo="Typo.subtitle2" Class="label">Problema que resolve</MudText>
+        <MudText Typo="Typo.body2" Class="mb-4">@Project.Problem</MudText>
+
+        <MudText Typo="Typo.subtitle2" Class="label">Principais funcionalidades</MudText>
+        <ul class="features">
+            @foreach (var feature in Project.Features)
+            {
+                <li>@feature</li>
+            }
+        </ul>
+
+        <MudText Typo="Typo.subtitle2" Class="label">Minha participação</MudText>
+        <MudText Typo="Typo.body2" Class="mb-4">@Project.Contribution</MudText>
+
+        @if (Project.Commands is not null)
+        {
+            <pre class="terminal"><code>@string.Join("\n", Project.Commands.Select(command => $"$ {command}"))</code></pre>
+        }
+
+        <TechChips Items="Project.Stack" />
+
+        @if (Project.AccessNote is not null)
+        {
+            <MudText Typo="Typo.caption" Class="note">
+                <MudIcon Icon="@Icons.Material.Filled.Lock" Size="Size.Small" />
+                @Project.AccessNote
+            </MudText>
+        }
+    </DialogContent>
+    <DialogActions>
+        @foreach (var link in Project.Links)
+        {
+            <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Href="@link.Url" Target="_blank" EndIcon="@Icons.Material.Filled.Launch">@link.Label</MudButton>
+        }
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="() => Dialog.Close()">Fechar</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] private IMudDialogInstance Dialog { get; set; } = default!;
+    [Parameter, EditorRequired] public FeaturedProject Project { get; set; } = default!;
+}

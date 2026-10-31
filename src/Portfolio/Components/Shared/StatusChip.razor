@@ -1,0 +1,5 @@
+<MudChip T="string" Size="Size.Small" Class="@($"status-chip status-chip--{Status.ToCssModifier()}")" Text="@Status.ToLabel()" />
+
+@code {
+    [Parameter, EditorRequired] public ProjectStatus Status { get; set; }
+}

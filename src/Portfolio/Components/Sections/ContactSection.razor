@@ -1,25 +1,46 @@
-<section id="contato" class="section contact">
-    <div class="container contact__inner">
-        <div data-reveal>
-            <SectionHeader Index="05" Label="Contato" Title="Vamos conversar"
-                           Description="Aberto a oportunidades, projetos e troca de ideias sobre .NET, geoinformação e desenvolvimento de software." />
-            <a class="button button--primary" href="@Profile.Resume" download>
-                <Icon Name="download" CssClass="button__icon" />
-                Baixar currículo em PDF
-            </a>
-        </div>
+@inject IDialogService DialogService
 
-        <ul class="channels" data-reveal>
-            @foreach (var channel in Profile.Channels)
-            {
-                <li>
-                    <a class="channel" href="@channel.Url" target="@(channel.Url.StartsWith("http") ? "_blank" : null)" rel="noopener">
-                        <span class="channel__label mono">@channel.Label</span>
-                        <span class="channel__value">@channel.Value</span>
-                        <Icon Name="arrow-up-right" CssClass="icon channel__icon" />
-                    </a>
-                </li>
-            }
-        </ul>
+<SectionTitle Title="Contato" Subtitle="Aberto a oportunidades, projetos e troca de ideias sobre .NET e geoinformação." />
+
+<MudGrid Justify="Justify.Center" Spacing="4">
+    <MudItem xs="12" sm="6" md="5">
+        <a class="contact-card contact-card--resume" href="@Profile.Resume" download="Curriculo-Joao-Marcelo-Daltro-Marques.pdf">
+            <MudIcon Icon="@Icons.Material.Filled.Download" Size="Size.Large" Class="contact-card__icon" />
+            <MudText Typo="Typo.h6">Baixar currículo</MudText>
+            <MudText Typo="Typo.body2" Class="contact-card__text">Versão atualizada em PDF</MudText>
+        </a>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="5">
+        <button type="button" class="contact-card contact-card--quick" @onclick="OpenAsync">
+            <MudIcon Icon="@Icons.Material.Filled.ContactPhone" Size="Size.Large" Class="contact-card__icon" />
+            <MudText Typo="Typo.h6">Contato rápido</MudText>
+            <MudText Typo="Typo.body2" Class="contact-card__text">E-mail, LinkedIn, GitHub e WhatsApp</MudText>
+        </button>
+    </MudItem>
+</MudGrid>
+
+<div class="social">
+    <MudText Typo="Typo.subtitle1" Align="Align.Center" Class="mb-4">Conecte-se comigo</MudText>
+    <div class="social__links">
+        <a class="social__link social__link--linkedin" href="@Profile.LinkedIn" target="_blank" rel="noopener" title="LinkedIn">
+            <MudIcon Icon="@Icons.Custom.Brands.LinkedIn" />
+        </a>
+        <a class="social__link social__link--github" href="@Profile.GitHub" target="_blank" rel="noopener" title="GitHub">
+            <MudIcon Icon="@Icons.Custom.Brands.GitHub" />
+        </a>
+        <a class="social__link social__link--email" href="mailto:@Profile.Email" title="E-mail">
+            <MudIcon Icon="@Icons.Material.Filled.Email" />
+        </a>
+        <a class="social__link social__link--whatsapp" href="@Profile.WhatsApp" target="_blank" rel="noopener" title="WhatsApp">
+            <MudIcon Icon="@Icons.Custom.Brands.WhatsApp" />
+        </a>
     </div>
-</section>
+</div>
+
+@code {
+    private Task OpenAsync()
+    {
+        var options = new DialogOptions { MaxWidth = MaxWidth.Small, FullWidth = true, CloseButton = true, CloseOnEscapeKey = true };
+        return DialogService.ShowAsync<ContactDialog>("Contato", options);
+    }
+}

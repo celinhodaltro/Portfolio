@@ -1,0 +1,29 @@
+<MudDialog Class="portfolio-dialog">
+    <TitleContent>
+        <div class="header">
+            <img class="sticker" src="@Experience.Image" alt="Eu na @Experience.Company" />
+            <div>
+                <MudText Typo="Typo.h6">@Experience.Role</MudText>
+                <MudText Typo="Typo.body2" Class="muted">@Experience.Company · @Experience.Period</MudText>
+            </div>
+        </div>
+    </TitleContent>
+    <DialogContent>
+        <MudText Typo="Typo.body1" Class="mb-3">@Experience.Summary</MudText>
+        <ul class="highlights">
+            @foreach (var highlight in Experience.Highlights)
+            {
+                <li>@highlight</li>
+            }
+        </ul>
+        <TechChips Items="Experience.Stack" Class="mt-4" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="() => Dialog.Close()">Fechar</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] private IMudDialogInstance Dialog { get; set; } = default!;
+    [Parameter, EditorRequired] public Experience Experience { get; set; } = default!;
+}

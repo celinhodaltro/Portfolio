@@ -1,3 +1,4 @@
+using MudBlazor;
 using Portfolio.Models;
 
 namespace Portfolio.Data;
@@ -24,7 +25,8 @@ public static class Projects
             "Projeto autoral: arquitetura, engine, backend, ferramentas e regras de jogo.",
             [".NET 9", "Silk.NET", "OpenGL", "ImGui.NET", "ASP.NET Core", "SignalR", "EF Core", "PostgreSQL", "Redis", ".NET Aspire"],
             [new("Versões anteriores", $"{Repositories}/Ursulla-Online-Server")],
-            AccessNote: "Código-fonte em repositório privado"),
+            AccessNote: "Código-fonte em repositório privado",
+            CoverIcon: Icons.Material.Filled.SportsEsports),
         new(
             "ExpForge",
             "Open source · CLI",
@@ -44,6 +46,8 @@ public static class Projects
                 new("Documentação", "https://celinhodaltro.github.io/ExpForge.Documentation/"),
                 new("npm", "https://www.npmjs.com/package/expforge")
             ],
+            "img/projects/expforge.webp",
+            "Logotipo do ExpForge",
             Commands: ["npm install -g expforge", "expforge --help"]),
         new(
             "Street View 360°",
@@ -77,7 +81,8 @@ public static class Projects
             "Desenvolvimento do backend: API, serviços de análise, integração com as câmeras e persistência em Oracle.",
             ["ASP.NET Core", "Background Services", "OpenCvSharp", "LibVLCSharp", "YOLO", "ONNX Runtime", "EF Core", "Oracle", "MediatR"],
             [],
-            AccessNote: "Sistema corporativo, sem código público"),
+            AccessNote: "Sistema corporativo, sem código público",
+            CoverIcon: Icons.Material.Filled.Videocam),
         new(
             "TGIS",
             "Projeto pessoal · GIS",
@@ -93,7 +98,8 @@ public static class Projects
             "Projeto autoral: engine, arquitetura e interface.",
             [".NET", "Blazor Hybrid", ".NET MAUI", "Radzen", "NetTopologySuite", "SQLite", "WebGL"],
             [],
-            AccessNote: "Código-fonte em repositório privado")
+            AccessNote: "Código-fonte em repositório privado",
+            CoverIcon: Icons.Material.Filled.Layers)
     ];
 
     public static readonly IReadOnlyList<ProjectSummary> Others =
@@ -136,13 +142,15 @@ public static class Projects
             "Ursulla Bot",
             "Bot para o Discord que organiza sessões de jogo, controlando valor por pessoa e classe escolhida.",
             ProjectStatus.Experimental,
-            [".NET", "NetCord", "PostgreSQL"]),
+            [".NET", "NetCord", "PostgreSQL"],
+            Image: "img/projects/ursulla-bot.webp"),
         new(
             "Vínculo",
             "API para centralizar dados do cidadão em contextos de governança pública, organizada por módulos de domínio.",
             ProjectStatus.Archived,
             ["ASP.NET Core", "EF Core", "PostgreSQL", "JWT", "xUnit"],
-            $"{Repositories}/Vinculo"),
+            $"{Repositories}/Vinculo",
+            "img/projects/vinculo.webp"),
         new(
             "Auth",
             "API de autenticação com ASP.NET Identity e tokens JWT, persistida em PostgreSQL.",
@@ -160,7 +168,8 @@ public static class Projects
             "Cadastro e consulta de faturas com relatórios exportados para Excel e testes de unidade.",
             ProjectStatus.Archived,
             ["ASP.NET MVC", "EF Core", "EPPlus", "xUnit"],
-            $"{Repositories}/ProjetoFatura"),
+            $"{Repositories}/ProjetoFatura",
+            "img/projects/projeto-fatura.webp"),
         new(
             "Blazor Hybrid Base",
             "Base de projeto que compartilha páginas e componentes entre uma aplicação web Blazor e um app .NET MAUI.",
@@ -169,9 +178,10 @@ public static class Projects
             $"{Repositories}/AppHybridWithBlazor"),
         new(
             "Portfólio",
-            "Este site: Blazor WebAssembly publicado no GitHub Pages por um pipeline no GitHub Actions.",
+            "Este site, feito com Blazor WebAssembly e MudBlazor e publicado no GitHub Pages por um pipeline no GitHub Actions.",
             ProjectStatus.Published,
-            ["Blazor WebAssembly", "GitHub Actions", "GitHub Pages"],
-            $"{Repositories}/Portfolio")
+            ["Blazor WebAssembly", "MudBlazor", "GitHub Actions"],
+            $"{Repositories}/Portfolio",
+            "img/projects/portfolio.webp")
     ];
 }

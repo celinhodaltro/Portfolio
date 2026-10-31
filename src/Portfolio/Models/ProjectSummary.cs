@@ -5,4 +5,5 @@ public sealed record ProjectSummary(
     string Description,
     ProjectStatus Status,
     IReadOnlyList<string> Stack,
-    string? Url = null);
+    string? Url = null,
+    string? Image = null);

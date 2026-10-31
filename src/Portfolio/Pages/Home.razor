@@ -1,35 +1,42 @@
 @page "/"
-@implements IAsyncDisposable
-@inject IJSRuntime JS
 
 <PageTitle>João Marcelo Daltro Marques · Desenvolvedor .NET</PageTitle>
 
-<HeroSection />
-<ExpertiseSection />
-<ExperienceSection />
-<ProjectsSection />
-<OtherProjectsSection />
-<ContactSection />
+<MudContainer MaxWidth="MaxWidth.False" Class="px-0">
+    @foreach (var item in Sections)
+    {
+        <section id="@item.Id" class="section">
+            <MudContainer MaxWidth="MaxWidth.Large">
+                <div class="glass section__panel">
+                    <DynamicComponent Type="item.Component" />
+                </div>
+            </MudContainer>
+        </section>
+    }
+
+    <footer class="footer">
+        <MudText Typo="Typo.caption">© @DateTime.Now.Year @Profile.Name · Feito com Blazor e MudBlazor</MudText>
+    </footer>
+</MudContainer>
+
+<nav class="floating-nav" aria-label="Seções">
+    @foreach (var item in Sections)
+    {
+        <MudTooltip Text="@item.Label" Placement="Placement.Left">
+            <MudFab StartIcon="@item.Icon" Size="Size.Small" Href="@($"#{item.Id}")" Class="floating-nav__button" aria-label="@item.Label" />
+        </MudTooltip>
+    }
+</nav>
 
 @code {
-    private IJSObjectReference? module;
+    private sealed record Section(string Id, string Label, string Icon, Type Component);
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (!firstRender)
-        {
-            return;
-        }
-
-        module = await JS.InvokeAsync<IJSObjectReference>("import", "./js/site.js");
-        await module.InvokeVoidAsync("init");
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        if (module is not null)
-        {
-            await module.DisposeAsync();
-        }
-    }
+    private static readonly Section[] Sections =
+    [
+        new("inicio", "Início", Icons.Material.Filled.Home, typeof(HeroSection)),
+        new("experiencia", "Experiência", Icons.Material.Filled.School, typeof(ExperienceSection)),
+        new("projetos", "Projetos", Icons.Material.Filled.SettingsSystemDaydream, typeof(ProjectsSection)),
+        new("outros-projetos", "Outros projetos", Icons.Material.Filled.Science, typeof(OtherProjectsSection)),
+        new("contato", "Contato", Icons.Material.Filled.ContactPhone, typeof(ContactSection))
+    ];
 }

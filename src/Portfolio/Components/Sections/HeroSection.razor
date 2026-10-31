@@ -1,43 +1,45 @@
-<section id="inicio" class="hero">
-    <div class="hero__inner container">
-        <div class="hero__content" data-reveal>
-            <p class="hero__location mono">@Profile.Coordinates · @Profile.Location</p>
-            <h1 class="hero__title">
-                <span class="hero__name">@Profile.Name</span>
-                <span class="hero__role">@Profile.Role</span>
-            </h1>
-            <p class="hero__headline">@Profile.Headline</p>
-            <p class="hero__intro">@Profile.Introduction</p>
-
-            <div class="hero__actions">
-                <a class="button button--primary" href="#projetos">
-                    Ver projetos
-                    <Icon Name="arrow-up-right" CssClass="button__icon" />
-                </a>
-                <a class="button" href="@Profile.Resume" download>
-                    <Icon Name="download" CssClass="button__icon" />
-                    Baixar currículo
-                </a>
-            </div>
-
-            <ul class="hero__social">
-                <li><a href="@Profile.GitHub" target="_blank" rel="noopener" aria-label="GitHub"><Icon Name="github" /></a></li>
-                <li><a href="@Profile.LinkedIn" target="_blank" rel="noopener" aria-label="LinkedIn"><Icon Name="linkedin" /></a></li>
-                <li><a href="mailto:@Profile.Email" aria-label="E-mail"><Icon Name="mail" /></a></li>
-            </ul>
-        </div>
-
-        <aside class="hero__panel" aria-label="Áreas de atuação" data-reveal>
-            <img class="hero__map" src="img/contours.svg" alt="" width="600" height="600" />
-            <ul class="hero__focus">
-                @foreach (var (item, index) in Profile.Focus.Select((item, index) => (item, index)))
-                {
-                    <li>
-                        <span class="hero__focus-index mono">@((index + 1).ToString("00"))</span>
-                        @item
-                    </li>
-                }
-            </ul>
-        </aside>
+<div class="hero">
+    <div class="hero__avatar">
+        <MudImage Src="@Profile.Avatar" Alt="Avatar de João Marcelo" Width="150" Height="225" Class="hero__avatar-image" />
     </div>
-</section>
+
+    <div class="hero__bio">
+        <MudText Typo="Typo.h4">@Profile.Name</MudText>
+        <MudText Typo="Typo.subtitle1" Class="hero__role">@Profile.Role · @Profile.Location</MudText>
+        <MudDivider Class="my-3" />
+        <MudText Typo="Typo.body1" Class="hero__headline">@Profile.Headline</MudText>
+        <MudText Typo="Typo.body2" Class="hero__intro">@Profile.Introduction</MudText>
+
+        <div class="hero__actions">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="#projetos" StartIcon="@Icons.Material.Filled.SettingsSystemDaydream">
+                Ver projetos
+            </MudButton>
+            <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Href="@Profile.Resume" StartIcon="@Icons.Material.Filled.Download"
+                       UserAttributes="@DownloadAttributes">
+                Baixar currículo
+            </MudButton>
+            <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Href="@Profile.GitHub" Target="_blank" aria-label="GitHub" Class="hero__social" />
+            <MudIconButton Icon="@Icons.Custom.Brands.LinkedIn" Href="@Profile.LinkedIn" Target="_blank" aria-label="LinkedIn" Class="hero__social" />
+        </div>
+    </div>
+</div>
+
+<MudDivider Class="my-6" />
+
+<MudGrid Spacing="3" Justify="Justify.Center">
+    @foreach (var area in Expertise.Areas)
+    {
+        <MudItem xs="12" sm="6" md="4">
+            <div class="skill glass-soft lift">
+                <MudIcon Icon="@area.Icon" Size="Size.Large" Class="skill__icon" />
+                <MudText Typo="Typo.h6" Class="skill__title">@area.Title</MudText>
+                <MudText Typo="Typo.body2" Class="skill__description">@area.Description</MudText>
+                <TechChips Items="area.Technologies" Class="skill__chips" />
+            </div>
+        </MudItem>
+    }
+</MudGrid>
+
+@code {
+    private static readonly Dictionary<string, object> DownloadAttributes = new() { ["download"] = "Curriculo-Joao-Marcelo-Daltro-Marques.pdf" };
+}

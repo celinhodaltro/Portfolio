@@ -1,0 +1,16 @@
+<div class="tech-chips @Class">
+    @foreach (var item in Items.Take(Limit ?? Items.Count))
+    {
+        <MudChip T="string" Size="Size.Small" Class="tech-chip" Text="@item" />
+    }
+    @if (Limit is int limit && Items.Count > limit)
+    {
+        <MudChip T="string" Size="Size.Small" Class="tech-chip" Text="@($"+{Items.Count - limit}")" />
+    }
+</div>
+
+@code {
+    [Parameter, EditorRequired] public IReadOnlyList<string> Items { get; set; } = [];
+    [Parameter] public int? Limit { get; set; }
+    [Parameter] public string? Class { get; set; }
+}

@@ -1,0 +1,11 @@
+<MudText Typo="Typo.h4" Align="Align.Center" Class="section-title">@Title</MudText>
+@if (!string.IsNullOrWhiteSpace(Subtitle))
+{
+    <MudText Typo="Typo.body1" Align="Align.Center" Class="section-subtitle">@Subtitle</MudText>
+}
+<MudDivider Class="mt-4 mb-6" />
+
+@code {
+    [Parameter, EditorRequired] public string Title { get; set; } = string.Empty;
+    [Parameter] public string? Subtitle { get; set; }
+}

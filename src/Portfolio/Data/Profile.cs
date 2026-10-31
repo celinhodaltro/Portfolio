@@ -8,7 +8,7 @@ public static class Profile
     public const string ShortName = "João Marcelo";
     public const string Role = "Desenvolvedor .NET";
     public const string Location = "Salvador, BA";
-    public const string Coordinates = "12°58′S 38°30′W";
+    public const string Avatar = "img/avatar/avatar.webp";
     public const string Email = "celinhodaltro@gmail.com";
     public const string GitHub = "https://github.com/celinhodaltro";
     public const string LinkedIn = "https://www.linkedin.com/in/joaomarcelomarques/";

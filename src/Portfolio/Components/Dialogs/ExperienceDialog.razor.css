@@ -1,0 +1,29 @@
+.header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.sticker {
+    width: 56px;
+    height: 74px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 12px;
+    border: 2px solid #fff;
+}
+
+::deep .muted {
+    color: var(--text-soft);
+}
+
+.highlights {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding-left: 1.2rem;
+}
+
+.highlights li::marker {
+    color: var(--cyan);
+}

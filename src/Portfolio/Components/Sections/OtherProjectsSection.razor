@@ -1,26 +1,30 @@
-<section id="outros-projetos" class="section">
-    <div class="container">
-        <SectionHeader Index="04" Label="Outros projetos" Title="Outros projetos e experimentações"
-                       Description="Estudos, protótipos e entregas menores, com o estado real de cada um." />
+<SectionTitle Title="Outros projetos" Subtitle="Estudos, experimentações e outras entregas, com o estado real de cada um." />
 
-        <ul class="cards">
-            @foreach (var project in Projects.Others)
-            {
-                <li class="card" data-reveal>
-                    <div class="card__top">
-                        <StatusBadge Status="project.Status" />
-                        @if (project.Url is not null)
-                        {
-                            <a class="card__link" href="@project.Url" target="_blank" rel="noopener" aria-label="Abrir @project.Name">
-                                <Icon Name="arrow-up-right" />
-                            </a>
-                        }
+<MudGrid Spacing="3">
+    @foreach (var project in Projects.Others)
+    {
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <article class="card glass-soft lift">
+                <div class="card__header">
+                    @if (project.Image is not null)
+                    {
+                        <img class="card__thumb" src="@project.Image" alt="" loading="lazy" />
+                    }
+                    <div class="card__heading">
+                        <MudText Typo="Typo.subtitle1" Class="card__title">@project.Name</MudText>
+                        <StatusChip Status="project.Status" />
                     </div>
-                    <h3 class="card__title">@project.Name</h3>
-                    <p class="card__description">@project.Description</p>
-                    <StackList Items="project.Stack" />
-                </li>
-            }
-        </ul>
-    </div>
-</section>
+                </div>
+                <MudText Typo="Typo.body2" Class="card__description">@project.Description</MudText>
+                <TechChips Items="project.Stack" Limit="4" />
+                @if (project.Url is not null)
+                {
+                    <MudButton Variant="Variant.Text" Color="Color.Primary" Size="Size.Small" Href="@project.Url" Target="_blank"
+                               StartIcon="@Icons.Custom.Brands.GitHub" Class="card__link">
+                        Repositório
+                    </MudButton>
+                }
+            </article>
+        </MudItem>
+    }
+</MudGrid>
