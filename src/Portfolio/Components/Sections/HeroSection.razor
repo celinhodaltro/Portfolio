@@ -1,0 +1,43 @@
+<section id="inicio" class="hero">
+    <div class="hero__inner container">
+        <div class="hero__content" data-reveal>
+            <p class="hero__location mono">@Profile.Coordinates · @Profile.Location</p>
+            <h1 class="hero__title">
+                <span class="hero__name">@Profile.Name</span>
+                <span class="hero__role">@Profile.Role</span>
+            </h1>
+            <p class="hero__headline">@Profile.Headline</p>
+            <p class="hero__intro">@Profile.Introduction</p>
+
+            <div class="hero__actions">
+                <a class="button button--primary" href="#projetos">
+                    Ver projetos
+                    <Icon Name="arrow-up-right" CssClass="button__icon" />
+                </a>
+                <a class="button" href="@Profile.Resume" download>
+                    <Icon Name="download" CssClass="button__icon" />
+                    Baixar currículo
+                </a>
+            </div>
+
+            <ul class="hero__social">
+                <li><a href="@Profile.GitHub" target="_blank" rel="noopener" aria-label="GitHub"><Icon Name="github" /></a></li>
+                <li><a href="@Profile.LinkedIn" target="_blank" rel="noopener" aria-label="LinkedIn"><Icon Name="linkedin" /></a></li>
+                <li><a href="mailto:@Profile.Email" aria-label="E-mail"><Icon Name="mail" /></a></li>
+            </ul>
+        </div>
+
+        <aside class="hero__panel" aria-label="Áreas de atuação" data-reveal>
+            <img class="hero__map" src="img/contours.svg" alt="" width="600" height="600" />
+            <ul class="hero__focus">
+                @foreach (var (item, index) in Profile.Focus.Select((item, index) => (item, index)))
+                {
+                    <li>
+                        <span class="hero__focus-index mono">@((index + 1).ToString("00"))</span>
+                        @item
+                    </li>
+                }
+            </ul>
+        </aside>
+    </div>
+</section>

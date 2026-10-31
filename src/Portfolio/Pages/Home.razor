@@ -1,0 +1,35 @@
+@page "/"
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+
+<PageTitle>João Marcelo Daltro Marques · Desenvolvedor .NET</PageTitle>
+
+<HeroSection />
+<ExpertiseSection />
+<ExperienceSection />
+<ProjectsSection />
+<OtherProjectsSection />
+<ContactSection />
+
+@code {
+    private IJSObjectReference? module;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+        {
+            return;
+        }
+
+        module = await JS.InvokeAsync<IJSObjectReference>("import", "./js/site.js");
+        await module.InvokeVoidAsync("init");
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (module is not null)
+        {
+            await module.DisposeAsync();
+        }
+    }
+}

@@ -1,0 +1,26 @@
+<section id="outros-projetos" class="section">
+    <div class="container">
+        <SectionHeader Index="04" Label="Outros projetos" Title="Outros projetos e experimentações"
+                       Description="Estudos, protótipos e entregas menores, com o estado real de cada um." />
+
+        <ul class="cards">
+            @foreach (var project in Projects.Others)
+            {
+                <li class="card" data-reveal>
+                    <div class="card__top">
+                        <StatusBadge Status="project.Status" />
+                        @if (project.Url is not null)
+                        {
+                            <a class="card__link" href="@project.Url" target="_blank" rel="noopener" aria-label="Abrir @project.Name">
+                                <Icon Name="arrow-up-right" />
+                            </a>
+                        }
+                    </div>
+                    <h3 class="card__title">@project.Name</h3>
+                    <p class="card__description">@project.Description</p>
+                    <StackList Items="project.Stack" />
+                </li>
+            }
+        </ul>
+    </div>
+</section>

@@ -1,24 +1,41 @@
-# Portfólio Pessoal - Blazor + MudBlazor
+# Portfólio
 
-Este repositório contém meu portfólio pessoal desenvolvido com **Blazor** e **MudBlazor**, utilizando o **.NET 9**. O objetivo é apresentar meus projetos, habilidades e experiências de forma interativa e moderna.
+Portfólio profissional de João Marcelo Daltro Marques, desenvolvido com Blazor WebAssembly e publicado no GitHub Pages.
 
-## 🚀 Tecnologias Utilizadas
+**Acesse:** [celinhodaltro.github.io/Portfolio](https://celinhodaltro.github.io/Portfolio/)
 
-- [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor): Framework para desenvolvimento de aplicações web interativas com C#.
-- [MudBlazor](https://mudblazor.com/): Biblioteca de componentes baseada no Material Design para Blazor.
-- [.NET 9](https://dotnet.microsoft.com/download/dotnet/9.0): Plataforma de desenvolvimento da Microsoft.
-- [CI/CD com GitHub Actions](https://docs.github.com/actions): Automatização de build e deploy contínuos.
+## Tecnologias
 
+- .NET 10 e Blazor WebAssembly
+- CSS com isolamento por componente, sem bibliotecas de UI
+- GitHub Actions para build e publicação no GitHub Pages
 
-## 🛠️ Configuração e Execução
+## Estrutura
 
-1. **Pré-requisitos**:
-   - [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)
-     
-2. **Clonar o repositório**:
-   ```bash
-   git clone https://github.com/celinhodaltro/Portifolio.git
-   dotnet restore
-   dotnet run
+```
+src/Portfolio
+├── Components
+│   ├── Layout       cabeçalho, rodapé e layout principal
+│   ├── Sections     seções da página inicial
+│   └── Shared       componentes reutilizáveis
+├── Data             conteúdo do portfólio: perfil, experiências e projetos
+├── Models           tipos usados pelo conteúdo
+├── Pages            páginas roteáveis
+└── wwwroot          estilos globais, scripts, imagens e currículo
+```
 
-   
+O conteúdo fica concentrado em `Data`. Para incluir uma experiência ou um projeto, basta adicionar um item na lista correspondente; os componentes de `Sections` apenas apresentam esses dados.
+
+## Executando localmente
+
+Pré-requisito: [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
+
+```bash
+git clone https://github.com/celinhodaltro/Portfolio.git
+cd Portfolio
+dotnet run --project src/Portfolio
+```
+
+## Publicação
+
+Cada push na branch `main` executa o workflow `deploy.yml`, que publica o projeto e atualiza a branch `gh-pages`.

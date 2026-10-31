@@ -1,0 +1,5 @@
+<span class="status status--@Status.ToCssModifier() mono">@Status.ToLabel()</span>
+
+@code {
+    [Parameter, EditorRequired] public ProjectStatus Status { get; set; }
+}

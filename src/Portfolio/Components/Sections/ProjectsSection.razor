@@ -1,0 +1,78 @@
+<section id="projetos" class="section">
+    <div class="container">
+        <SectionHeader Index="03" Label="Projetos" Title="Projetos de destaque"
+                       Description="Projetos autorais e entregas profissionais que mostram como penso e construo software." />
+
+        <div class="projects">
+            @foreach (var project in Projects.Featured)
+            {
+                <article class="project" data-reveal>
+                    @if (project.Image is not null)
+                    {
+                        <figure class="project__image">
+                            <img src="@project.Image" alt="@project.ImageAlt" loading="lazy" decoding="async" width="1600" height="768" />
+                        </figure>
+                    }
+
+                    <div class="project__body">
+                        <div class="project__overview">
+                            <div class="project__heading">
+                                <p class="project__context mono">@project.Context</p>
+                                <StatusBadge Status="project.Status" />
+                            </div>
+                            <h3 class="project__name">@project.Name</h3>
+                            <p class="project__summary">@project.Summary</p>
+
+                            <dl class="project__details">
+                                <div>
+                                    <dt class="mono">Problema</dt>
+                                    <dd>@project.Problem</dd>
+                                </div>
+                                <div>
+                                    <dt class="mono">Minha participação</dt>
+                                    <dd>@project.Contribution</dd>
+                                </div>
+                            </dl>
+
+                            @if (project.Commands is not null)
+                            {
+                                <pre class="project__terminal" aria-label="Instalação"><code>@foreach (var command in project.Commands)
+{<span class="project__prompt">$ </span>@command@("\n")}</code></pre>
+                            }
+                        </div>
+
+                        <div class="project__specs">
+                            <p class="project__label mono">Funcionalidades</p>
+                            <ul class="project__features">
+                                @foreach (var feature in project.Features)
+                                {
+                                    <li>@feature</li>
+                                }
+                            </ul>
+
+                            <p class="project__label mono">Tecnologias</p>
+                            <StackList Items="project.Stack" />
+
+                            <div class="project__links">
+                                @foreach (var link in project.Links)
+                                {
+                                    <a class="project__link" href="@link.Url" target="_blank" rel="noopener">
+                                        @link.Label
+                                        <Icon Name="arrow-up-right" />
+                                    </a>
+                                }
+                                @if (project.AccessNote is not null)
+                                {
+                                    <span class="project__note">
+                                        <Icon Name="lock" />
+                                        @project.AccessNote
+                                    </span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            }
+        </div>
+    </div>
+</section>

@@ -1,0 +1,43 @@
+<header class="header" data-header>
+    <div class="header__inner container">
+        <a class="brand" href="#inicio" aria-label="Início" @onclick="Close">
+            <span class="brand__mark">JM</span>
+            <span class="brand__name">@Profile.ShortName</span>
+        </a>
+
+        <button class="header__toggle" type="button" aria-controls="menu-principal" aria-expanded="@(isOpen ? "true" : "false")" @onclick="Toggle">
+            <Icon Name="@(isOpen ? "close" : "menu")" />
+            <span class="visually-hidden">@(isOpen ? "Fechar menu" : "Abrir menu")</span>
+        </button>
+
+        <nav id="menu-principal" class="nav @(isOpen ? "nav--open" : null)" aria-label="Seções">
+            <ul class="nav__list">
+                @foreach (var (id, label) in Sections)
+                {
+                    <li><a class="nav__link" href="#@id" data-nav="@id" @onclick="Close">@label</a></li>
+                }
+            </ul>
+            <a class="nav__resume" href="@Profile.Resume" download @onclick="Close">
+                <Icon Name="download" />
+                Currículo
+            </a>
+        </nav>
+    </div>
+</header>
+
+@code {
+    private static readonly (string Id, string Label)[] Sections =
+    [
+        ("especialidades", "Especialidades"),
+        ("experiencia", "Experiência"),
+        ("projetos", "Projetos"),
+        ("outros-projetos", "Outros projetos"),
+        ("contato", "Contato")
+    ];
+
+    private bool isOpen;
+
+    private void Toggle() => isOpen = !isOpen;
+
+    private void Close() => isOpen = false;
+}

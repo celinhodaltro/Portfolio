@@ -1,0 +1,25 @@
+<section id="contato" class="section contact">
+    <div class="container contact__inner">
+        <div data-reveal>
+            <SectionHeader Index="05" Label="Contato" Title="Vamos conversar"
+                           Description="Aberto a oportunidades, projetos e troca de ideias sobre .NET, geoinformação e desenvolvimento de software." />
+            <a class="button button--primary" href="@Profile.Resume" download>
+                <Icon Name="download" CssClass="button__icon" />
+                Baixar currículo em PDF
+            </a>
+        </div>
+
+        <ul class="channels" data-reveal>
+            @foreach (var channel in Profile.Channels)
+            {
+                <li>
+                    <a class="channel" href="@channel.Url" target="@(channel.Url.StartsWith("http") ? "_blank" : null)" rel="noopener">
+                        <span class="channel__label mono">@channel.Label</span>
+                        <span class="channel__value">@channel.Value</span>
+                        <Icon Name="arrow-up-right" CssClass="icon channel__icon" />
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</section>

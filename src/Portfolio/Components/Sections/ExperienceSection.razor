@@ -1,0 +1,35 @@
+<section id="experiencia" class="section">
+    <div class="container">
+        <SectionHeader Index="02" Label="Experiência" Title="Trajetória profissional"
+                       Description="Sistemas corporativos, integrações e geoinformação em ambientes reais de produção." />
+
+        <ol class="timeline">
+            @foreach (var experience in Career.Experiences)
+            {
+                <li class="role" data-reveal>
+                    <div class="role__meta">
+                        <p class="role__period mono">@experience.Period</p>
+                        <p class="role__company">@experience.Company</p>
+                    </div>
+                    <div class="role__body">
+                        <h3 class="role__title">@experience.Role</h3>
+                        <p class="role__summary">@experience.Summary</p>
+                        <ul class="role__highlights">
+                            @foreach (var highlight in experience.Highlights)
+                            {
+                                <li>@highlight</li>
+                            }
+                        </ul>
+                        <StackList Items="experience.Stack" />
+                    </div>
+                </li>
+            }
+        </ol>
+
+        <div class="education" data-reveal>
+            <p class="education__label mono">Formação</p>
+            <p class="education__course">@Profile.Education.Course</p>
+            <p class="education__detail">@Profile.Education.Institution · @Profile.Education.Period</p>
+        </div>
+    </div>
+</section>
